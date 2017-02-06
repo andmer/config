@@ -1,8 +1,8 @@
 nnoremap ; :
 nnoremap <s-u> :redo<CR>
 
-let mapleader="\<SPACE>"
-"let mapleader="\;"
+"let mapleader="\<SPACE>"
+let mapleader=","
 map <tab> :bnext<CR>
 map <s-tab> :bprevious<CR>
 map <leader>nn :NERDTreeToggle<CR>
@@ -14,11 +14,29 @@ nmap <leader>w :w!<cr>
 nmap <leader>qq :wq!<cr>
 nmap <leader>n :m +1<CR>
 nmap <leader>m :m -2<CR>
-nnoremap <esc> :noh<CR>:NERDTreeClose<CR>:Neoformat<CR><esc>
+"nnoremap <esc> :noh<CR>:NERDTreeClose<CR>:Neoformat<CR><esc>
+nnoremap <esc> :noh<CR>:NERDTreeClose<CR><esc>
 nnoremap <leader><TAB> :bnext<CR>
-inoremap ;; <C-o>:Neoformat<CR><C-o>A;<CR>
+inoremap ;; <C-o>A;<CR>
 inoremap {{ <C-o>A {}<left><CR><CR><up><space><space><space><space>
+inoremap <leader>cf <C-o>//clang-format off
 
+nmap <leader>a= :Tabularize /=<CR>
+vmap <leader>a= :Tabularize /=<CR>
+nmap <leader>a: :Tabularize /:<CR>
+vmap <leader>a: :Tabularize /:<CR>
+nmap <leader>a:: :Tabularize /:\zs<CR>
+vmap <leader>a:: :Tabularize /:\zs<CR>
+nmap <leader>a, :Tabularize /,<CR>
+vmap <leader>a, :Tabularize /,<CR>
+nmap <leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+nmap <leader>a- :Tabularize /-<CR>
+vmap <leader>a- :Tabularize /-<CR>
+nmap <leader>a-> :Tabularize /-><CR>
+vmap <leader>a-> :Tabularize /-><CR>
+nmap <leader>a=> :Tabularize /=><CR>
+vmap <leader>a=> :Tabularize /=><CR><Paste>
 "map <C-j> <C-W>j
 "map <C-k> <C-W>k
 "map <C-h> <C-W>h
@@ -37,8 +55,8 @@ Plugin 'tpope/vim-surround'
 "Plugin 'morhetz/gruvbox'
 "Plugin 'mhartington/oceanic-next
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Rip-Rip/clang_complete'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Rip-Rip/clang_complete'
 Plugin 'mhinz/vim-startify'
 Plugin 'kien/ctrlp.vim'
 "Plugin 'Shougo/deoplete.nvim'
@@ -53,9 +71,11 @@ Plugin 'whatyouhide/vim-gotham'
 Plugin 'tomasr/molokai'
 "Plugin 'vheon/vim-cursormode'
 "Plugin 'thirtythreeforty/lessspace.vim'
-Plugin 'sbdchd/neoformat'
-"Plugin 'tpope/vim-repeat'
-"Plugin 'lfilho/cosco.vim'
+"Plugin 'sbdchd/neoformat'
+Plugin 'tpope/vim-repeat'
+Plugin 'lfilho/cosco.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'rhysd/vim-clang-format'
 call vundle#end()
 
 filetype plugin indent on
@@ -141,16 +161,18 @@ colorscheme molokai
 " }
 
 
-let g:clang_library_path='/usr/lib/llvm-3.8/lib'
-let g:chromatica#libclang_path='/usr/lib/llvm-3.8/lib'
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:chromatica#responsive_mode=1
-let g:chromatica#highlight_feature_level=1
-let g:chromatica#enable_at_startup=1
-let g:cpp_class_scope_highlight = 1
+let g:clang_library_path                         = '/usr/lib/llvm-3.8/lib'
+let g:chromatica#libclang_path                   = '/usr/lib/llvm-3.8/lib'
+let g:ycm_global_ycm_extra_conf                  = '~/.vim/.ycm_extra_conf.py'
+let g:chromatica#responsive_mode                 = 1
+let g:chromatica#highlight_feature_level         = 1
+let g:chromatica#enable_at_startup               = 1
+let g:cpp_class_scope_highlight                  = 1
 let g:cpp_experimental_simple_template_highlight = 1
-let c_no_curly_error=1
-let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+let c_no_curly_error                             = 1
+let g:startify_custom_indices                    = map(range(1,100), 'string(v:val)')
+let g:clang_format#auto_format                   = 1
+
 "let g:auto_comma_or_semicolon = 1;
 "hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 "hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=black guifg=yellow
